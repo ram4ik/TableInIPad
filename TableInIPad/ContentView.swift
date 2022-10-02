@@ -10,12 +10,28 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Table(SomeData.examples) {
+                TableColumn("Some data name", value: \.name)
+                TableColumn("Some data details", value: \.details)
+            }
         }
         .padding()
+    }
+}
+
+struct SomeData: Identifiable, Hashable {
+    let id = UUID()
+    let name: String
+    let details: String
+}
+
+extension SomeData {
+    static var examples: [SomeData] {
+        [
+            .init(name: "One", details: "First"),
+            .init(name: "Two", details: "Second"),
+            .init(name: "Three", details: "Third")
+        ]
     }
 }
 
